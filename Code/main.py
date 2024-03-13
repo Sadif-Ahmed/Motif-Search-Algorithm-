@@ -5,6 +5,8 @@ from randomized_greedy import find_greedy_motif_randomized;
 from pssm import find_greedy_motif_pwm;
 from multiple_greedy import find_greedy_motifs;
 from background import find_greedy_motif_background;
+from enum_scoring import find_motif_kmer_scanning;
+from thresh_refine import find_motif_kmer_scanning_refined;
 def read_lines_from_file(filename):
   try:
     with open(filename, 'r') as file:
@@ -24,7 +26,7 @@ def randomised_greedy_motif(sequences,k):
     return motif,score
 
 def multiple_greedy_motif(sequences,k):
-    num_motifs = 2
+    num_motifs = 1
     motifs = find_greedy_motifs(sequences, k, num_motifs)
     return motifs
 
@@ -35,6 +37,19 @@ def pssm_motif(sequences,k):
 def background_motif(sequences,k):
     motif, score = find_greedy_motif_background(sequences, k)
     return motif,score
+
+def enumeration_counting_motif(sequences,k):
+    motif, score = find_motif_kmer_scanning(sequences, k)
+    return motif,score
+
+def enumeration_counting_refined_motif(sequences,k):
+    min_score = 2
+    motif, score = find_motif_kmer_scanning_refined(sequences, k, min_score)
+    if motif:
+        return motif,score
+    else:
+        print("No motif found above the threshold.")
+    
 
 if __name__ == "__main__":
     filename = "data/hm03.txt"
@@ -53,7 +68,7 @@ if __name__ == "__main__":
     start_time = time.time()  # Get the current time in seconds
 
     # Your code to be timed here
-    motif,score = weighted_greedy_motif(sequences=sequences,k=20)
+    motif,score = multiple_greedy_motif(sequences=sequences,k=13)
     end_time = time.time()
     elapsed_time = end_time - start_time
 
