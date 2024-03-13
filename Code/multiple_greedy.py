@@ -67,6 +67,7 @@ def find_greedy_motif_single_randomized(sequences, k, max_iterations=100):
   best_score = float('-inf')
 
   for _ in range(max_iterations):
+    print(_)
     motif_scores = {}
     for sequence in sequences:
       for i in range(len(sequence) - k + 1):
@@ -97,7 +98,9 @@ def calculate_background(sequences):
   """
   background = Counter()
   for sequence in sequences:
+
     background.update(sequence)
+
   total_count = sum(background.values())
   return {nucleotide: count / total_count for nucleotide, count in background.items()}
 
