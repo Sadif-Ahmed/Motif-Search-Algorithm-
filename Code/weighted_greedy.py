@@ -17,7 +17,7 @@ def score_kmer(kmer, weights):
     score += weights.get(nucleotide, 0) * (i + 1)  # Weight by position
   return score
 
-def find_greedy_motif(sequences, k, weights, max_iterations=100):
+def find_greedy_motif_weighted(sequences, k, weights, max_iterations=100):
   """
   Implements the greedy motif search algorithm with weighted scoring.
 
@@ -52,11 +52,3 @@ def find_greedy_motif(sequences, k, weights, max_iterations=100):
 
   return best_motif, best_score
 
-# Example usage
-sequences = ["ACGTGGCT", "TTAGATCC", "ACTGGTCA", "CCAGTTAC"]
-k = 5
-weights = {"A": 1, "C": 2, "G": 0.5, "T": 3}  # Example weights (modify as needed)
-
-motif, score = find_greedy_motif(sequences, k, weights)
-
-print(f"Motif: {motif}, Score: {score}")

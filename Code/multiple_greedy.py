@@ -101,12 +101,4 @@ def calculate_background(sequences):
   total_count = sum(background.values())
   return {nucleotide: count / total_count for nucleotide, count in background.items()}
 
-# Example usage
-sequences = ["ACGTGGCT", "TTAGATCC", "ACTGGTCA", "CCAGTTAC"]
-k = 5
-num_motifs = 2
 
-motifs = find_greedy_motifs(sequences, k, num_motifs)
-
-for motif, score in motifs:
-  print(f"Motif: {motif}, Score: {score}")

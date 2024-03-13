@@ -95,10 +95,4 @@ def find_greedy_motif_pwm(sequences, k, max_iterations=100):
 
  return best_motif, best_score
 
-# Example usage
-sequences = ["ACGTGGCT", "TTAGATCC", "ACTGGTCA", "CCAGTTAC"]
-k = 5
 
-motif, score = find_greedy_motif_pwm(sequences, k)
-
-print(f"Motif: {motif}, Score: {score}")
