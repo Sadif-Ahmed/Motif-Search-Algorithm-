@@ -46,10 +46,4 @@ def find_motif_kmer_scanning(sequences, k):
   best_kmer, best_score = max(kmer_scores.items(), key=lambda item: item[1])
   return best_kmer, best_score
 
-# Example usage
-sequences = ["ACGTGGCT", "TTAGATCC", "ACTGGTCA", "CCAGTTAC"]
-k = 5
 
-motif, score = find_motif_kmer_scanning(sequences, k)
-
-print(f"Motif: {motif}, Score: {score}")
