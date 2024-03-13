@@ -65,14 +65,3 @@ def find_motif_kmer_scanning_refined(sequences, k, min_score=0):
 
   return best_kmer, best_score
 
-# Example usage
-sequences = ["ACGTGGCT", "TTAGATCC", "ACTGGTCA", "CCAGTTAC"]
-k = 5
-min_score = 2
-
-motif, score = find_motif_kmer_scanning_refined(sequences, k, min_score)
-
-if motif:
-  print(f"Motif: {motif}, Score: {score}")
-else:
-  print("No motif found above the threshold.")

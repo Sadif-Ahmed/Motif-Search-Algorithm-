@@ -1,3 +1,4 @@
+import csv
 import time
 import numpy as np;
 from weighted_greedy import find_greedy_motif_weighted;
@@ -68,10 +69,26 @@ if __name__ == "__main__":
     start_time = time.time()  # Get the current time in seconds
 
     # Your code to be timed here
-    motif,score = multiple_greedy_motif(sequences=sequences,k=13)
+    K=13
+    motif,score = weighted_greedy_motif(sequences=sequences,k=K)
     end_time = time.time()
     elapsed_time = end_time - start_time
 
     print(f"Elapsed time: {elapsed_time:.2f} seconds")
     print("Motif: " + motif)
     print("Score: " + str(score))
+    data = [
+  ["Input file", "K", "Motif","Score","Time"],
+  ["hm03.txt", K, motif,score,elapsed_time],]
+with open('results/weighted_greedy/test1.csv', 'w', newline='') as csvfile:
+    # Create a csv writer object
+    writer = csv.writer(csvfile)
+
+    # Write the header row
+    writer.writerow(data[0])
+
+    # Write the data rows
+    for row in data[1:]:
+        writer.writerow(row)
+
+    print("CSV file created successfully!")
