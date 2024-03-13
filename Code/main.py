@@ -76,7 +76,7 @@ if __name__ == "__main__":
     for i in range(8,16):
         K=i
         start_time = time.time()  # Get the current time in seconds
-        motif,score = enumeration_counting_refined_motif(sequences=sequences,k=K)
+        motif,score = randomised_greedy_motif(sequences=sequences,k=K)
         motif = motif.strip()
         end_time = time.time()
         elapsed_time = end_time - start_time
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         print("Score: " + str(score))
         data.append(["yst08r.txt", K, motif,score,elapsed_time])
 
-with open('results/thresh_refine/test3.csv', 'w', newline='') as csvfile:
+with open('results/rand_greedy/test3.csv', 'w', newline='') as csvfile:
     # Create a csv writer object
     writer = csv.writer(csvfile)
 

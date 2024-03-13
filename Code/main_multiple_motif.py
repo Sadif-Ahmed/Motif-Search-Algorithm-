@@ -53,7 +53,7 @@ def enumeration_counting_refined_motif(sequences,k):
     
 
 if __name__ == "__main__":
-    filename = "data/hm03.txt"
+    filename = "data/yst08r.txt"
 
     sequences = read_lines_from_file(filename)
     data = [
@@ -67,9 +67,9 @@ if __name__ == "__main__":
         elapsed_time = end_time - start_time
         print(f"Elapsed time: {elapsed_time:.2f} seconds")
         for j in range(len(motifs)):
-            data.append(["hm03.txt", K, motifs[j][0].strip(),motifs[j][1],elapsed_time/len(motifs)])
+            data.append(["yst08r.txt", K, motifs[j][0].strip(),motifs[j][1],elapsed_time/len(motifs)])
 
-with open('results/multiple_greedy/test1.csv', 'w', newline='') as csvfile:
+with open('results/multiple_greedy/test3.csv', 'w', newline='') as csvfile:
     # Create a csv writer object
     writer = csv.writer(csvfile)
 
