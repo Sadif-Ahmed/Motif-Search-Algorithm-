@@ -48,7 +48,7 @@ def find_motif_kmer_scanning_refined(sequences, k, min_score=0):
         kmer_scores[kmer] = score
 
   if not kmer_scores:
-    return None, None  # No k-mers met the threshold
+    return "", 0  # No k-mers met the threshold
 
   # Refine the top-scoring k-mer
   best_kmer, best_score = max(kmer_scores.items(), key=lambda item: item[1])

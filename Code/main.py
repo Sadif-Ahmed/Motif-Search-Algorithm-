@@ -46,14 +46,12 @@ def enumeration_counting_motif(sequences,k):
 def enumeration_counting_refined_motif(sequences,k):
     min_score = 2
     motif, score = find_motif_kmer_scanning_refined(sequences, k, min_score)
-    if motif:
-        return motif,score
-    else:
-        print("No motif found above the threshold.")
+    
+    return motif,score
     
 
 if __name__ == "__main__":
-    filename = "data/hm03.txt"
+    filename = "data/yst08r.txt"
 
     sequences = read_lines_from_file(filename)
 
@@ -78,7 +76,7 @@ if __name__ == "__main__":
     for i in range(8,16):
         K=i
         start_time = time.time()  # Get the current time in seconds
-        motif,score = randomised_greedy_motif(sequences=sequences,k=K)
+        motif,score = enumeration_counting_refined_motif(sequences=sequences,k=K)
         motif = motif.strip()
         end_time = time.time()
         elapsed_time = end_time - start_time
@@ -86,9 +84,9 @@ if __name__ == "__main__":
         print(f"Elapsed time: {elapsed_time:.2f} seconds")
         print("Motif: " + motif)
         print("Score: " + str(score))
-        data.append(["hm03.txt", K, motif,score,elapsed_time])
+        data.append(["yst08r.txt", K, motif,score,elapsed_time])
 
-with open('results/pssm/test1.csv', 'w', newline='') as csvfile:
+with open('results/thresh_refine/test3.csv', 'w', newline='') as csvfile:
     # Create a csv writer object
     writer = csv.writer(csvfile)
 
