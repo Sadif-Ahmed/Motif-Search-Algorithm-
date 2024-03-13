@@ -75,6 +75,7 @@ if __name__ == "__main__":
         K=i
         start_time = time.time()  # Get the current time in seconds
         motif,score = randomised_greedy_motif(sequences=sequences,k=K)
+        motif = motif.strip()
         end_time = time.time()
         elapsed_time = end_time - start_time
 
