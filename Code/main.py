@@ -66,20 +66,23 @@ if __name__ == "__main__":
     # else:
     #     print("No sequences read from the file.")
     
-    start_time = time.time()  # Get the current time in seconds
+    
 
     # Your code to be timed here
-    K=13
-    motif,score = weighted_greedy_motif(sequences=sequences,k=K)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-
-    print(f"Elapsed time: {elapsed_time:.2f} seconds")
-    print("Motif: " + motif)
-    print("Score: " + str(score))
     data = [
-  ["Input file", "K", "Motif","Score","Time"],
-  ["hm03.txt", K, motif,score,elapsed_time],]
+  ["Input file", "K", "Motif","Score","Time"],]
+    for i in range(8,16):
+        K=i
+        start_time = time.time()  # Get the current time in seconds
+        motif,score = weighted_greedy_motif(sequences=sequences,k=K)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+
+        print(f"Elapsed time: {elapsed_time:.2f} seconds")
+        print("Motif: " + motif)
+        print("Score: " + str(score))
+        data.append(["hm03.txt", K, motif,score,elapsed_time])
+        
 with open('results/weighted_greedy/test1.csv', 'w', newline='') as csvfile:
     # Create a csv writer object
     writer = csv.writer(csvfile)
