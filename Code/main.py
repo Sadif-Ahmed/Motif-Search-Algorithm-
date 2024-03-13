@@ -56,6 +56,10 @@ if __name__ == "__main__":
     filename = "data/hm03.txt"
 
     sequences = read_lines_from_file(filename)
+
+    for i in range(len(sequences)):
+        sequences[i] = sequences[i].strip()
+
     seq_count=1
 
     # if sequences:
@@ -84,7 +88,7 @@ if __name__ == "__main__":
         print("Score: " + str(score))
         data.append(["hm03.txt", K, motif,score,elapsed_time])
 
-with open('results/rand_greedy/test1.csv', 'w', newline='') as csvfile:
+with open('results/pssm/test1.csv', 'w', newline='') as csvfile:
     # Create a csv writer object
     writer = csv.writer(csvfile)
 
