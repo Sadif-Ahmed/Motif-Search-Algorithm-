@@ -9,6 +9,7 @@ from background import find_greedy_motif_background;
 from enum_scoring import find_motif_kmer_scanning;
 from thresh_refine import find_motif_kmer_scanning_refined;
 from background import score_kmer_background;
+from background import calculate_background;
 def read_lines_from_file(filename):
   try:
     with open(filename, 'r') as file:
@@ -59,35 +60,20 @@ if __name__ == "__main__":
     for i in range(len(sequences)):
         sequences[i] = sequences[i].strip()
 
-    seq_count=1
-
-    # if sequences:
-    #     print("Found Sequences:  "+str(len(sequences)))
-    #     for sequence in sequences:
-    #         print(str(seq_count)+"  :  "+sequence.strip())  # Remove trailing newline character
-    #         seq_count+=1
-    # else:
-    #     print("No sequences read from the file.")
-    
-    
-
+    algo_tools=['Weighted Greedy','Randomised Greedy','Multiple Greedy','Enumeration & Scoring','PSSM','Threshold Refining','Background Model','MEME(cd)','MEME(de)','STREME(cd)','STREME(de)']
+    motifs1 = ['AATCAGCACTCTGT','CCCGCCGCCCGCCC','GCGCCGGCCGCGC','CAGCTTAGTGCCTG','AAAAAAAAAAAAAA','AGCTTAGTGCCTGA','GCGCCGGCCGCGC','TTTTCCTCTTCATC','GGTATTATTAAA?C','AAAAAAAAGTGAAA','AAAACAAAGCGAAG']
+    motifs2 = ['AAAAAAAAAAAAAA','AGGTGGCGGAGGGG','ATAAAGCTAGAGA','AAGGAAGAAAAAAA','TTTATTTTATTTTT','AAGGAAGAAAAAAA','ATAAAGCTAGAGA','G?ATT?A?ACTGTT','AAAGAAGAAGTGAA','GAAAAGAAAAAAAA','GAAAAGAAAAAAAA']
+    motifs3 = ['AAAAAAAAAAAAAA','GGCGCCGCGCCGCC','GTAAGAATAAACG','AAGGAAGAAAAAAA','TTTTTATTTTATTT','AAGGAAGAAAAAAA','GTAAGAATAAACG','AAGGGTT?T?TACT','AATAAACACATACA','GGAAAAAAAAAAAD','AAAAAAAAAAATAG']
     # Your code to be timed here
     data = [
-  ["Input file", "K", "Motif","Score","Time"],]
-    for i in range(8,16):
-        K=i
-        start_time = time.time()  # Get the current time in seconds
-        motif,score = randomised_greedy_motif(sequences=sequences,k=K)
-        motif = motif.strip()
-        end_time = time.time()
-        elapsed_time = end_time - start_time
+  ["Algorithm/Tool", "K", "Motif","Score"],]
+    for i in range(len(algo_tools)):
+       motifs3[i]=motifs3[i].replace("?","A")
+       motifs3[i]=motifs3[i].replace("D","A")
+       score = score_kmer_background(motifs3[i],calculate_background(sequences=sequences))
+       data.append([algo_tools[i],14,motifs3[i],score]);    
 
-        print(f"Elapsed time: {elapsed_time:.2f} seconds")
-        print("Motif: " + motif)
-        print("Score: " + str(score))
-        data.append(["yst08r.txt", K, motif,score,elapsed_time])
-
-with open('results/rand_greedy/test3.csv', 'w', newline='') as csvfile:
+with open('results/comparison/dataset3.csv', 'w', newline='') as csvfile:
     # Create a csv writer object
     writer = csv.writer(csvfile)
 
