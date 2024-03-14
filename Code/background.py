@@ -51,6 +51,7 @@ def find_greedy_motif_background(sequences, k, max_iterations=100):
   best_score = float('-inf')
 
   for _ in range(max_iterations):
+    print(_)
     motif_scores = {}
     for sequence in sequences:
       for i in range(len(sequence) - k + 1):

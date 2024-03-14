@@ -18,7 +18,7 @@ def score_kmer(kmer, background):
     score += np.log2( (1 / background[nucleotide]) )  # Log-likelihood score
   return score
 
-def find_greedy_motifs(sequences, k, num_motifs, max_iterations=100):
+def find_greedy_motifs(sequences, k, num_motifs):
   """
   Implements the greedy motif search algorithm to find multiple motifs.
 
@@ -35,6 +35,7 @@ def find_greedy_motifs(sequences, k, num_motifs, max_iterations=100):
   remaining_sequences = sequences.copy()
 
   for _ in range(num_motifs):
+    print(_)
     # Find the motif in the remaining sequences
     motif, score = find_greedy_motif_single_randomized(remaining_sequences, k)
     motifs.append((motif, score))
@@ -67,6 +68,7 @@ def find_greedy_motif_single_randomized(sequences, k, max_iterations=100):
   best_score = float('-inf')
 
   for _ in range(max_iterations):
+    print(_)
     motif_scores = {}
     for sequence in sequences:
       for i in range(len(sequence) - k + 1):
@@ -97,7 +99,9 @@ def calculate_background(sequences):
   """
   background = Counter()
   for sequence in sequences:
+
     background.update(sequence)
+
   total_count = sum(background.values())
   return {nucleotide: count / total_count for nucleotide, count in background.items()}
 

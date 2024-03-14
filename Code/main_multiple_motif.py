@@ -27,7 +27,7 @@ def randomised_greedy_motif(sequences,k):
     return motif,score
 
 def multiple_greedy_motif(sequences,k):
-    num_motifs = 1
+    num_motifs = 5
     motifs = find_greedy_motifs(sequences, k, num_motifs)
     return motifs
 
@@ -46,47 +46,30 @@ def enumeration_counting_motif(sequences,k):
 def enumeration_counting_refined_motif(sequences,k):
     min_score = 2
     motif, score = find_motif_kmer_scanning_refined(sequences, k, min_score)
-    
-    return motif,score
+    if motif:
+        return motif,score
+    else:
+        print("No motif found above the threshold.")
     
 
 if __name__ == "__main__":
     filename = "data/yst08r.txt"
 
     sequences = read_lines_from_file(filename)
-
-    for i in range(len(sequences)):
-        sequences[i] = sequences[i].strip()
-
-    seq_count=1
-
-    # if sequences:
-    #     print("Found Sequences:  "+str(len(sequences)))
-    #     for sequence in sequences:
-    #         print(str(seq_count)+"  :  "+sequence.strip())  # Remove trailing newline character
-    #         seq_count+=1
-    # else:
-    #     print("No sequences read from the file.")
-    
-    
-
-    # Your code to be timed here
     data = [
   ["Input file", "K", "Motif","Score","Time"],]
     for i in range(8,16):
         K=i
         start_time = time.time()  # Get the current time in seconds
-        motif,score = randomised_greedy_motif(sequences=sequences,k=K)
-        motif = motif.strip()
+        motifs =multiple_greedy_motif(sequences=sequences,k=K)
+        print(motifs)
         end_time = time.time()
         elapsed_time = end_time - start_time
-
         print(f"Elapsed time: {elapsed_time:.2f} seconds")
-        print("Motif: " + motif)
-        print("Score: " + str(score))
-        data.append(["yst08r.txt", K, motif,score,elapsed_time])
+        for j in range(len(motifs)):
+            data.append(["yst08r.txt", K, motifs[j][0].strip(),motifs[j][1],elapsed_time/len(motifs)])
 
-with open('results/rand_greedy/test3.csv', 'w', newline='') as csvfile:
+with open('results/multiple_greedy/test3.csv', 'w', newline='') as csvfile:
     # Create a csv writer object
     writer = csv.writer(csvfile)
 
