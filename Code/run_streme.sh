@@ -6,13 +6,10 @@ rm streme_output.csv
 rm streme_outputs.zip
 
 for target in $(ls *fasta); do
-	#streme
 	for i in {8..15}; do
-		~/bin/streme --p ${target} --verbosity 1 --objfun de --w $i --nmotifs 1 --verbosity 1 --text >streme_out_k_${i}_de__${target}.txt
-	done
-
-	for i in {8..15}; do
-		~/bin/streme --p ${target} --verbosity 1 --objfun cd --w $i --nmotifs 1 --verbosity 1 --text >streme_out_k_${i}_cd__${target}.txt
+		for objf_n in cd de; do
+			~/bin/streme --p ${target} --verbosity 1 --objfun ${objf_n} --w $i --nmotifs 1 --alph dna_alphabet.txt --text >streme_out_k_${i}_${objf_n}__${target}.txt
+		done
 	done
 done
 

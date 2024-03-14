@@ -14,7 +14,7 @@ for target in $(ls *fasta); do
     # meme
     for i in {8..15}; do
         for objf_n in cd de; do
-            ~/bin/meme ${target} -nostatus -objfun ${objf_n} -dna -w ${i} -text >meme_out_s_k_${i}_${c_}__${target}.txt
+            ~/bin/meme ${target} -nostatus -objfun ${objf_n} -dna -w ${i} -alph dna_alphabet.txt -text >meme_out_s_k_${i}_${c_}__${target}.txt
             ((c_++))
 
         done
@@ -29,7 +29,7 @@ for target in $(ls *fasta); do
 
             # motif name(this is a combined name ,i.e. all combinations of neucleotides
             # have a name, N and X are wildcard) from output file
-            motif=$(grep -o -G -m 1 "MOTIF [ATGCRYKMSWBDHVNX]*" $file_target | sed -r "s/MOTIF[ ]*//g")
+            motif=$(grep -o -G -m 1 "MOTIF [ATGCRYKMSWBDHVNX\?]*" $file_target | sed -r "s/MOTIF[ ]*//g")
 
             # width of motif from motif metadata
             w=$(grep -o -E "width =[ ]*[0-9]+" $file_target | sed -r "s/width[ ]*=[ ]*//g")
