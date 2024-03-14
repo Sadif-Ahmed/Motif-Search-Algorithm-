@@ -3,33 +3,14 @@ import random
 import numpy as np
 
 def score_kmer(kmer, background):
-  """
-  Calculates the score of a k-mer based on its frequency compared to background.
-
-  Args:
-      kmer: A string representing the k-mer sequence.
-      background: A dictionary containing background nucleotide frequencies (A, C, G, T).
-
-  Returns:
-      A float representing the score of the kmer.
-  """
+ 
   score = 0
   for nucleotide in kmer:
     score += np.log2( (1 / background[nucleotide]) )  # Log-likelihood score
   return score
 
 def find_greedy_motif_randomized(sequences, k, max_iterations=100):
-  """
-  Implements the greedy motif search algorithm with randomization.
 
-  Args:
-      sequences: A list of DNA sequences (strings).
-      k: The length of the motif to search for.
-      max_iterations: The maximum number of iterations for the algorithm (optional).
-
-  Returns:
-      A tuple containing the consensus motif (string) and its score (float).
-  """
   # Randomly initialize a motif
   motif = ''.join(random.choice('ACGT') for _ in range(k))
 
@@ -57,15 +38,7 @@ def find_greedy_motif_randomized(sequences, k, max_iterations=100):
   return best_motif, best_score
 
 def calculate_background(sequences):
-  """
-  Calculates the background nucleotide frequencies from the sequences.
-
-  Args:
-      sequences: A list of DNA sequences (strings).
-
-  Returns:
-      A dictionary containing background nucleotide frequencies (A, C, G, T).
-  """
+ 
   background = Counter()
   for sequence in sequences:
     background.update(sequence)

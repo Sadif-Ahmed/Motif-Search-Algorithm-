@@ -1,36 +1,14 @@
 from collections import Counter
 
 def score_kmer(kmer, weights):
-  """
-  Calculates the weighted score of a k-mer based on position weights.
-
-  Args:
-      kmer: A string representing the k-mer sequence.
-      weights: A dictionary where keys are nucleotide characters (A, C, G, T) 
-              and values are corresponding weights for each position in the kmer.
-
-  Returns:
-      A float representing the weighted score of the kmer.
-  """
+ 
   score = 0
   for i, nucleotide in enumerate(kmer):
     score += weights.get(nucleotide, 0) * (i + 1)  # Weight by position
   return score
 
 def find_greedy_motif_weighted(sequences, k, weights, max_iterations=100):
-  """
-  Implements the greedy motif search algorithm with weighted scoring.
-
-  Args:
-      sequences: A list of DNA sequences (strings).
-      k: The length of the motif to search for.
-      weights: A dictionary where keys are nucleotide characters (A, C, G, T) 
-              and values are corresponding weights for each position in the kmer.
-      max_iterations: The maximum number of iterations for the algorithm (optional).
-
-  Returns:
-      A tuple containing the consensus motif (string) and its score (float).
-  """
+ 
   best_motif = None
   best_score = float('-inf')
 
